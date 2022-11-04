@@ -15,7 +15,10 @@ class App {
     this.userTryCount = this.userTryCount + 1;
     MissionUtils.Console.readLine("숫자를 입력해주세요!", (userNum) => {
       this.userNum = [...String(userNum)];
-      const checkuserinput = new CheckUserInput({ userNum: this.userNum });
+      const checkuserinput = new CheckUserInput({
+        userNum: this.userNum,
+      });
+
       try {
         checkuserinput.checkValidation();
       } catch (error) {
@@ -24,6 +27,7 @@ class App {
       }
 
       const game = new Game({ user: this.userNum, computer: this.computer });
+      console.log(this.computer);
 
       const [ballCount, strikeCount] = game.judgement();
       this.ball = ballCount;
@@ -37,17 +41,15 @@ class App {
       if (render.restart === true) {
         MissionUtils.Console.readLine("1, 2중 선택해주세요", (number) => {
           this.restartNumber = number;
+          if (this.restartNumber === "1") {
+            this.userTryCount = 0;
+            this.computer = Computer();
+            this.play();
+          }
+          if (this.restartNumber === "2") {
+            MissionUtils.Console.print(`수고하셨습니다.`);
+          }
         });
-      }
-
-      if (this.restartNumber === 1) {
-        this.userTryCount = 0;
-        this.computer = Computer();
-        this.play();
-      }
-
-      if (this.restartNumber === 0) {
-        MissionUtils.Console.print(`수고하셨습니다.`);
       }
     });
   }
