@@ -42,6 +42,11 @@ class GameRule {
   result() {
     return [this.#strikeCount, this.#ballCount];
   }
+
+  reset() {
+    this.#strikeCount = 0;
+    this.#ballCount = 0;
+  }
 }
 
 module.exports = GameRule;
