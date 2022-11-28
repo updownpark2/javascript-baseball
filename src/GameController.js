@@ -27,15 +27,29 @@ class GameController {
 
   gameCalculation(userInput) {
     gameRule.totalCalculation(this.computer, userInput);
-    console.log(gameRule.result());
-    if (this.gameContinue(gameRule.result()) === true) {
-      gameRule.reset();
-      this.gameStart();
+    const gameResult = gameRule.result();
+    console.log(gameResult);
+    if (this.gameEnd(gameResult) === true) {
+      this.gameRetry(gameResult);
+      return;
     }
+    this.gameContinue(gameResult);
   }
 
   gameContinue(result) {
-    if (result[0] !== 3) {
+    UserOutput.showResult(result);
+    gameRule.reset();
+    this.gameStart();
+  }
+
+  gameRetry(result) {
+    UserOutput.showResult(result);
+    UserOutput.retry();
+    UserInput.retry((userInput) => {});
+  }
+
+  gameEnd(result) {
+    if (result[0] === 3) {
       return true;
     }
   }
