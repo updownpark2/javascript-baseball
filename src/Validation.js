@@ -1,11 +1,14 @@
-const CheckNumber = {
-  length: (userInput) => {
-    if (userInput.length > 3) {
+class Validation {
+  checkNumber(userInput) {
+    if (userInput.length !== 3) {
       throw new Error(`3개의 숫자만 입력해주세요`);
     }
-  },
+    if (/^[0~9]*$/g.test(userInput) === false) {
+      throw new Error(`숫자만 입력해주세요`);
+    }
+  }
 
-  range: (userInput) => {
+  checkRange(userInput) {
     let checkArr = [];
     while (checkArr.length < 3) {
       if (checkArr.includes(userInput)) {
@@ -13,11 +16,7 @@ const CheckNumber = {
       }
       checkArr.push(userInput);
     }
-  },
+  }
+}
 
-  onlyNumber: (userInput) => {
-    if (/^[0~9]$/g.test(userInput) === false) {
-      throw new Error(`숫자만 입력해주세요`);
-    }
-  },
-};
+module.exports = Validation;
