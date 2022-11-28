@@ -28,7 +28,6 @@ class GameController {
   gameCalculation(userInput) {
     gameRule.totalCalculation(this.computer, userInput);
     const gameResult = gameRule.result();
-    console.log(gameResult);
     if (this.gameEnd(gameResult) === true) {
       this.gameRetry(gameResult);
       return;
@@ -45,7 +44,23 @@ class GameController {
   gameRetry(result) {
     UserOutput.showResult(result);
     UserOutput.retry();
-    UserInput.retry((userInput) => {});
+    UserInput.retry((userInput) => {
+      validation.checkRetry(userInput);
+      if (gameRule.retry(userInput) === true) {
+        this.gameReplay();
+        return;
+      }
+      this.gameComplete();
+    });
+  }
+
+  gameReplay() {
+    gameRule.reset();
+    this.getComputer();
+    this.gameStart();
+  }
+  gameComplete() {
+    UserOutput.complete();
   }
 
   gameEnd(result) {
