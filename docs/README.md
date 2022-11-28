@@ -15,6 +15,10 @@
 
 - 유저에게 받은 입력값을 룰에따라 처리(model)
 
+컴퓨터 값과 유저의 입력값의 배열을 비교
+strikeCount와 ballCount를 내부에서 해결
+일치하면 strike Up 존재하면 ballCount Up
+
 - 처리된 입력값에 따라 출력하기 (view)
 
 - 3개의 숫자를 모두 맞히면 boolean 리턴(model)
