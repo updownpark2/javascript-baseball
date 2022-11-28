@@ -1,20 +1,29 @@
 class Validation {
-  checkNumber(userInput) {
-    if (userInput.length !== 3) {
-      throw new Error(`3개의 숫자만 입력해주세요`);
-    }
-    if (/^[0~9]*$/g.test(userInput) === false) {
-      throw new Error(`숫자만 입력해주세요`);
-    }
+  stringToArr(userInput) {
+    return userInput.split("");
   }
 
   checkRange(userInput) {
     let checkArr = [];
-    while (checkArr.length < 3) {
-      if (checkArr.includes(userInput)) {
-        throw new Error(`중복숫자가 있습니다.`);
+    let i = 0;
+    for (; i < 3; i++) {
+      if (checkArr.includes(userInput[i])) {
+        return false;
       }
-      checkArr.push(userInput);
+      checkArr.push(userInput[i]);
+    }
+    return true;
+  }
+
+  checkNumber(userInput) {
+    if (userInput.length !== 3) {
+      throw new Error(`3개의 숫자만 입력해주세요.`);
+    }
+    if (/^[1-9]*$/g.test(userInput) === false) {
+      throw new Error(`숫자만 입력해주세요.`);
+    }
+    if (this.checkRange(this.stringToArr(userInput)) === false) {
+      throw new Error(`반복되지 않는 3개의 숫자를 입력해주세요.`);
     }
   }
 }
