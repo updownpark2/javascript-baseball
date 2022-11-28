@@ -47,6 +47,15 @@ class GameRule {
     this.#strikeCount = 0;
     this.#ballCount = 0;
   }
+
+  retry(userInput) {
+    if (userInput === "1") {
+      return true;
+    }
+    if (userInput === "2") {
+      return false;
+    }
+  }
 }
 
 module.exports = GameRule;
