@@ -26,6 +26,14 @@ class Validation {
       throw new Error(`반복되지 않는 3개의 숫자를 입력해주세요.`);
     }
   }
+  checkRetry(userInput) {
+    if (userInput.length !== 1) {
+      throw new Error(`1개의 숫자만 입력해주세요.`);
+    }
+    if (/^[1-2]*$/g.test(userInput) === false) {
+      throw new Error(`1 또는 2의 숫자만 입력해주세요`);
+    }
+  }
 }
 
 module.exports = Validation;
