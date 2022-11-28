@@ -12,9 +12,12 @@ class GameController {
     this.computer = Computer();
   }
 
-  gameStart() {
+  gameStartMent() {
     UserOutput.start();
     this.getComputer();
+  }
+
+  gameStart() {
     UserInput.number((userInput) => {
       console.log(this.computer);
       validation.checkNumber(userInput);
@@ -25,6 +28,16 @@ class GameController {
   gameCalculation(userInput) {
     gameRule.totalCalculation(this.computer, userInput);
     console.log(gameRule.result());
+    if (this.gameContinue(gameRule.result()) === true) {
+      gameRule.reset();
+      this.gameStart();
+    }
+  }
+
+  gameContinue(result) {
+    if (result[0] !== 3) {
+      return true;
+    }
   }
 }
 
